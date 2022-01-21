@@ -5,8 +5,8 @@ const rtspRelay = require('rtsp-relay');
 const cors = require('cors')
 
 const options = {
-  key: fs.readFileSync("./server.key", 'utf8'),
-  cert: fs.readFileSync("./server.cert", 'utf8'),
+  key: fs.readFileSync("./key.pem", 'utf8'),
+  cert: fs.readFileSync("./cert.pem", 'utf8'),
 };
 
 const app = express();
