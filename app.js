@@ -13,7 +13,7 @@ const app = express();
 app.use(cors())
 const server = https.createServer(options, app);
 
-const { proxy, scriptUrl } = rtspRelay(app, server);
+const { proxy, scriptUrl } = rtspRelay(app); //, server);
 
 //Get 
 app.ws('/api/stream/:username/:password/:domain/:channel', (ws, req) => {
@@ -36,7 +36,7 @@ app.get('/:username/:password/:domain/:channel', (req, res) => {
   <script src='${scriptUrl}'></script>
   <script>
     loadPlayer({
-      url: 'wss://' + location.host + '/api/stream/${req.params.username}/${req.params.password}/${req.params.domain}/${req.params.channel}',
+      url: 'ws://' + location.host + '/api/stream/${req.params.username}/${req.params.password}/${req.params.domain}/${req.params.channel}',
       canvas: document.getElementById('canvas')
     });
     
@@ -46,6 +46,6 @@ app.get('/:username/:password/:domain/:channel', (req, res) => {
 
 );
 
-server.listen(3000, () => {
+app.listen(3000, () => {
   console.log('Port 3000')
 });
